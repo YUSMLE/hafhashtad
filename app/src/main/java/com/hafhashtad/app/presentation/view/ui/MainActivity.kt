@@ -1,10 +1,11 @@
-package com.hafhashtad.app
+package com.hafhashtad.app.presentation.view.ui
 
 import android.os.Bundle
 import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
+import com.hafhashtad.app.R
 
 import kotlinx.android.synthetic.main.activity_main.*
 
