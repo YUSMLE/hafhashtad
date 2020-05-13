@@ -1,2 +1,4 @@
 rootProject.name='hafhashtad'
 include ':app'
+include ':core'
+include ':network'
