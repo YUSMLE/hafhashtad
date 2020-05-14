@@ -20,6 +20,7 @@ object Versions {
 
     /* Jetpack Architecture Components */
     const val jetpackLifeCycle = "2.2.0"
+    const val jetpackNavigation = "2.3.0-alpha03"
 
     /* Reactive Extensions */
     const val rxJava = "2.1.3"

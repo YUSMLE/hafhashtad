@@ -2,6 +2,8 @@ package com.hafhashtad.app
 
 import android.app.Activity
 import android.app.Application
+import com.hafhashtad.app.framework.di.components.AppComponent
+import com.hafhashtad.app.framework.di.components.DaggerAppComponent
 import com.yusmle.network.monitoring.NetworkStateHolder.registerConnectivityBroadcaster
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector

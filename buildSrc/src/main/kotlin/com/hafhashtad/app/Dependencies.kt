@@ -21,6 +21,14 @@ object Dependencies {
     val lifeCycleExtensions = "androidx.lifecycle:lifecycle-extensions:${Versions.jetpackLifeCycle}"
     val lifeCycleCommonJava8 = "androidx.lifecycle:lifecycle-common-java8:${Versions.jetpackLifeCycle}"
 
+    /* Jetpack Navigation Component */
+    val navigationFragment = "androidx.navigation:navigation-fragment:${Versions.jetpackNavigation}"
+    val navigationFragmentKtx = "androidx.navigation:navigation-fragment-ktx:${Versions.jetpackNavigation}"
+    val navigationUi = "androidx.navigation:navigation-ui:${Versions.jetpackNavigation}"
+    val navigationUiKtx = "androidx.navigation:navigation-ui-ktx:${Versions.jetpackNavigation}"
+    val navigationDynamicFeaturesFragment = "androidx.navigation:navigation-dynamic-features-fragment:${Versions.jetpackNavigation}"
+    val navigationTesting = "androidx.navigation:navigation-testing:${Versions.jetpackNavigation}"
+
     /* RxJava */
     val rxJva = "io.reactivex.rxjava2:rxjava:${Versions.rxJava}"
     val rxAndroid = "io.reactivex.rxjava2:rxandroid:${Versions.rxAndroid}"

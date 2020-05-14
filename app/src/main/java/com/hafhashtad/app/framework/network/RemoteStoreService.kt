@@ -1,6 +1,6 @@
 package com.hafhashtad.app.framework.network
 
-import CategoryResponse
+import com.hafhashtad.app.framework.network.response.CategoryResponse
 import com.hafhashtad.app.framework.network.response.ProductResponse
 import retrofit2.Response
 import retrofit2.http.GET

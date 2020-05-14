@@ -12,7 +12,7 @@ import com.hafhashtad.app.R
 /**
  * A simple [Fragment] subclass as the second destination in the navigation.
  */
-class SecondFragment : Fragment() {
+class CategoriesFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -28,5 +28,21 @@ class SecondFragment : Fragment() {
         view.findViewById<Button>(R.id.button_second).setOnClickListener {
             findNavController().navigate(R.id.action_SecondFragment_to_FirstFragment)
         }
+    }
+
+    companion object {
+
+        /**
+         * Use this factory method to create a new instance of this fragment.
+         *
+         * @return A new instance of fragment [CategoriesFragment].
+         */
+        fun newInstance(): CategoriesFragment {
+            return CategoriesFragment()
+        }
+
+        val TAG = CategoriesFragment::class.java.simpleName
+        val ID = CategoriesFragment::class.java.simpleName.hashCode()
+        const val TITLE: Int = R.string.second_fragment_label
     }
 }

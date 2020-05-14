@@ -91,6 +91,14 @@ dependencies {
     implementation Dependencies.lifeCycleExtensions
     kapt Dependencies.lifeCycleCommonJava8
 
+    /* Jetpack Navigation Component */
+    implementation Dependencies.navigationFragment
+    implementation Dependencies.navigationFragmentKtx
+    implementation Dependencies.navigationUi
+    implementation Dependencies.navigationUiKtx
+    implementation Dependencies.navigationDynamicFeaturesFragment
+    androidTestImplementation Dependencies.navigationTesting
+
     /* RxJava */
     implementation Dependencies.rxJva
     implementation Dependencies.rxAndroid

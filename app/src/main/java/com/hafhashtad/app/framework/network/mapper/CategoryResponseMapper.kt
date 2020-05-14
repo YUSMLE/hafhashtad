@@ -1,6 +1,6 @@
 package com.hafhashtad.app.framework.network.mapper
 
-import CategoryResponse
+import com.hafhashtad.app.framework.network.response.CategoryResponse
 import com.hafhashtad.app.mapper.DataMapper
 import com.hafhashtad.core.domain.Category
 import javax.inject.Inject
