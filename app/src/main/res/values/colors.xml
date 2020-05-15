@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#C71585</color>      <!-- Arghavaani -->
+    <color name="colorPrimaryDark">#B22222</color>  <!-- Sharaabi   -->
+    <color name="colorAccent">#FF1493</color>       <!-- Shafaghi  -->
+    <color name="colorBackground">#EEEEEE</color>
+
+    <!-- Flavors -->
+    <color name="colorTextTitle">#1B1D1D</color>
+    <color name="colorTextDescription">#767676</color>
+    <color name="colorTextComment">#767676</color>
+</resources>

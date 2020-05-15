@@ -1,0 +1,131 @@
+apply plugin: Plugins.androidApplication
+apply plugin: Plugins.kotlinAndroid
+apply plugin: Plugins.kotlinAndroidExtensions
+apply plugin: Plugins.kotlinKapt
+
+android {
+    compileSdkVersion Configs.compileSdkVersion
+
+    defaultConfig {
+        applicationId Configs.applicationId
+        minSdkVersion Configs.minSdkVersion
+        targetSdkVersion Configs.targetSdkVersion
+        versionCode Configs.versionCode
+        versionName Configs.versionName
+
+        testInstrumentationRunner Configs.testInstrumentationRunner
+        multiDexEnabled true
+    }
+
+    buildTypes {
+        debug {
+            minifyEnabled false
+            shrinkResources false
+            //useProguard false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            applicationVariants.all { variant ->
+                variant.outputs.all {
+                    outputFileName = "Hafhashtad v${defaultConfig.versionName} - (${variant.buildType.name}).apk"
+                }
+            }
+        }
+        release {
+            minifyEnabled false
+            shrinkResources false
+            //useProguard false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            applicationVariants.all { variant ->
+                variant.outputs.all {
+                    outputFileName = "Hafhashtad v${defaultConfig.versionName}.apk"
+                }
+            }
+        }
+    }
+
+    /* This is how to use Java 8 Language Lambda feature. */
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    /* Specify JVM target of Kotlin to Java v1.8 */
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8
+    }
+
+    /* This is how to use data binding feature of Android Studio. */
+    dataBinding {
+        enabled = true
+    }
+}
+
+dependencies {
+
+    /* Modules */
+    implementation project(path: ':core')
+    implementation project(path: ':network')
+
+    /* JAR Dependencies */
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+
+    /* Kotlin */
+    implementation Dependencies.kotlin
+
+    /* Testing */
+    testImplementation Dependencies.jUnit
+    androidTestImplementation Dependencies.androidXTestRunner
+    androidTestImplementation Dependencies.androidXTestExt
+    androidTestImplementation(Dependencies.espessoCore, {
+        exclude group: Dependencies.excludeGroup, module: Dependencies.excludeModule
+    })
+
+    /* AndroidX Support */
+    implementation Dependencies.androidXCoreKtx
+    implementation Dependencies.androidXAppCompat
+    implementation Dependencies.androidXConstraintLayout
+    implementation Dependencies.androidXRecyclerView
+    implementation Dependencies.androidXCardView
+    implementation Dependencies.androidXSwipeRefreshLayout
+    implementation Dependencies.googleAndroidMaterial
+
+    /* Jetpack Lifecycle Component */
+    implementation Dependencies.lifeCycleExtensions
+    kapt Dependencies.lifeCycleCommonJava8
+
+    /* Jetpack Navigation Component */
+    implementation Dependencies.navigationFragment
+    implementation Dependencies.navigationFragmentKtx
+    implementation Dependencies.navigationUi
+    implementation Dependencies.navigationUiKtx
+    implementation Dependencies.navigationDynamicFeaturesFragment
+    androidTestImplementation Dependencies.navigationTesting
+
+    /* RxJava */
+    implementation Dependencies.rxJva
+    implementation Dependencies.rxAndroid
+
+    /* Kotlin Coroutines */
+    implementation Dependencies.kotlinXCoroutinesCore
+    implementation Dependencies.kotlinXCoroutinesAndroid
+
+    /* Dependency Injection using Dagger2 */
+    implementation Dependencies.dagger
+    implementation Dependencies.daggerAndroidSupport
+    kapt Dependencies.daggerCompiler
+    kapt Dependencies.daggerAndroidProcessor
+
+    /* Remote API Call using Retrofit2 */
+    implementation Dependencies.retrofit
+    implementation Dependencies.converterGson
+    implementation Dependencies.adapterRxJava
+    implementation Dependencies.okHttp
+    implementation Dependencies.loggingInterceptor
+    implementation Dependencies.gson
+
+    /* Other */
+
+    implementation(Dependencies.glide) {
+        exclude group: Dependencies.excludeGroup
+    }
+    kapt Dependencies.glideCompiler
+}
