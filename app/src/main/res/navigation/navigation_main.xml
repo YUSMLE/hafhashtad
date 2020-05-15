@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation_main"
+    app:startDestination="@id/ProductsFragment">
+
+    <fragment
+        android:id="@+id/ProductsFragment"
+        android:name="com.hafhashtad.app.presentation.view.ui.ProductsFragment"
+        android:label="@string/first_fragment_label"
+        tools:layout="@layout/fragment_products">
+
+        <action
+            android:id="@+id/action_ProductsFragment_to_CategoriesFragment"
+            app:destination="@id/CategoriesFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/CategoriesFragment"
+        android:name="com.hafhashtad.app.presentation.view.ui.CategoriesFragment"
+        android:label="@string/second_fragment_label"
+        tools:layout="@layout/fragment_categories">
+
+        <action
+            android:id="@+id/action_CategoriesFragment_to_ProductsFragment"
+            app:destination="@id/ProductsFragment" />
+    </fragment>
+</navigation>
