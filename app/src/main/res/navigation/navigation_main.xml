@@ -2,27 +2,27 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/nav_graph"
-    app:startDestination="@id/FirstFragment">
+    android:id="@+id/navigation_main"
+    app:startDestination="@id/ProductsFragment">
 
     <fragment
-        android:id="@+id/FirstFragment"
+        android:id="@+id/ProductsFragment"
         android:name="com.hafhashtad.app.presentation.view.ui.ProductsFragment"
         android:label="@string/first_fragment_label"
-        tools:layout="@layout/fragment_first">
+        tools:layout="@layout/fragment_products">
 
         <action
-            android:id="@+id/action_FirstFragment_to_SecondFragment"
-            app:destination="@id/SecondFragment" />
+            android:id="@+id/action_ProductsFragment_to_CategoriesFragment"
+            app:destination="@id/CategoriesFragment" />
     </fragment>
     <fragment
-        android:id="@+id/SecondFragment"
+        android:id="@+id/CategoriesFragment"
         android:name="com.hafhashtad.app.presentation.view.ui.CategoriesFragment"
         android:label="@string/second_fragment_label"
-        tools:layout="@layout/fragment_second">
+        tools:layout="@layout/fragment_categories">
 
         <action
-            android:id="@+id/action_SecondFragment_to_FirstFragment"
-            app:destination="@id/FirstFragment" />
+            android:id="@+id/action_CategoriesFragment_to_ProductsFragment"
+            app:destination="@id/ProductsFragment" />
     </fragment>
 </navigation>
