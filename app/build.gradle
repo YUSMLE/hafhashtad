@@ -121,4 +121,11 @@ dependencies {
     implementation Dependencies.okHttp
     implementation Dependencies.loggingInterceptor
     implementation Dependencies.gson
+
+    /* Other */
+
+    implementation(Dependencies.glide) {
+        exclude group: Dependencies.excludeGroup
+    }
+    kapt Dependencies.glideCompiler
 }

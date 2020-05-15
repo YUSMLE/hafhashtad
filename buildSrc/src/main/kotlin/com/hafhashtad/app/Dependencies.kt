@@ -52,6 +52,12 @@ object Dependencies {
     val loggingInterceptor = "com.squareup.okhttp3:logging-interceptor:${Versions.okHttp}"
     val gson = "com.google.code.gson:gson:${Versions.gson}"
 
+    /* Other */
+
+    // Media management and image loading framework
+    val glide = "com.github.bumptech.glide:glide:${Versions.glide}"
+    val glideCompiler = "com.github.bumptech.glide:compiler:${Versions.glide}"
+
     /**
      * To add an external maven dependency:
      * compile "groupId:artifactId:version"

@@ -37,4 +37,7 @@ object Versions {
     const val retrofit = "2.6.0"
     const val okHttp = "4.0.1"
     const val gson = "2.6.2"
+
+    /* Other */
+    const val glide = "4.11.0"
 }

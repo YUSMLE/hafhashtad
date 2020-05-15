@@ -1,40 +1,165 @@
 package com.hafhashtad.app.presentation.view.ui
 
+import android.content.Intent
 import android.os.Bundle
-import com.google.android.material.snackbar.Snackbar
-import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
-import android.view.MenuItem
+import androidx.appcompat.widget.Toolbar
+import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.FragmentManager
+import androidx.lifecycle.ViewModelProvider
 import com.hafhashtad.app.R
+import com.hafhashtad.app.common.BaseActivity
+import com.hafhashtad.app.databinding.ActivityMainBinding
+import com.hafhashtad.app.presentation.viewmodel.MainVM
+import javax.inject.Inject
 
-import kotlinx.android.synthetic.main.activity_main.*
+class MainActivity : BaseActivity() {
 
-class MainActivity : AppCompatActivity() {
+    /**
+     * Values
+     */
+
+    @Inject
+    internal lateinit var viewModelProviderFactory: ViewModelProvider.Factory
+
+    private lateinit var mainVM: MainVM
+    private lateinit var dataBinding: ActivityMainBinding
+
+    @Inject
+    lateinit var fragmentManager: FragmentManager
+
+    @Inject
+    lateinit var productsFragment: ProductsFragment
+
+    @Inject
+    lateinit var categoriesFragment: CategoriesFragment
+
+    /****************************************************
+     * ACTIVITY LIFECYCLE
+     ***************************************************/
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-        setSupportActionBar(toolbar)
+    }
 
-        fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show()
-        }
+    override fun onStart() {
+        super.onStart()
+    }
+
+    override fun onRestoreInstanceState(savedInstanceState: Bundle) {
+        super.onRestoreInstanceState(savedInstanceState)
+    }
+
+    override fun onResume() {
+        super.onResume()
+    }
+
+    override fun onWindowFocusChanged(hasFocus: Boolean) {
+        super.onWindowFocusChanged(hasFocus)
+    }
+
+    override fun onPause() {
+        super.onPause()
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+    }
+
+    override fun onStop() {
+        super.onStop()
+    }
+
+    override fun onRestart() {
+        super.onRestart()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+    }
+
+    override fun onNewIntent(intent: Intent) {
+        super.onNewIntent(intent)
+
+        extractIntentParams(intent)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         // Inflate the menu; this adds items to the action bar if it is present.
         menuInflater.inflate(R.menu.menu_main, menu)
+
         return true
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        return when (item.itemId) {
-            R.id.action_settings -> true
-            else -> super.onOptionsItemSelected(item)
-        }
+    /****************************************************
+     * ACTIVITY STATE
+     ***************************************************/
+
+    override fun initializeActivity(savedInstanceState: Bundle?) {
+        // Nothing
+    }
+
+    override fun extractIntentParams(data: Intent?) {
+        // Nothing
+    }
+
+    /****************************************************
+     * VIEW/DATA BINDING
+     ***************************************************/
+
+    override fun setupViews() {
+        // Set Content View
+        dataBinding = DataBindingUtil.setContentView(this, R.layout.activity_main)
+    }
+
+    override fun setupActionBar() {
+        val toolbar = findViewById<Toolbar>(R.id.toolbar)
+        setSupportActionBar(toolbar)
+        val actionBar = supportActionBar
+        actionBar!!.setDisplayShowTitleEnabled(true)
+        actionBar.setDisplayHomeAsUpEnabled(false)
+    }
+
+    override fun setupNavigation() {
+        /* It will be set automatically. */
+
+        // Init fragments and then, open [ProductsFragment] as default fragment
+        initFragments()
+    }
+
+    private fun initFragments() {
+        /* Fragments will be injected by Mr. Dagger */
+
+        /* [ProductsFragment] will be showed automatically. */
+    }
+
+    /****************************************************
+     * OBSERVERS
+     ***************************************************/
+
+    override fun setupObservers() {
+        super.setupObservers()
+
+        mainVM = ViewModelProvider(this, viewModelProviderFactory).get(MainVM::class.java)
+    }
+
+    /****************************************************
+     * SERVICE BINDING
+     ***************************************************/
+
+    // Nothing
+
+    companion object {
+        val TAG = MainActivity::class.java.simpleName
+        const val EXTRA_FRAGMENT_ID = "EXTRA_FRAGMENT_ID"
+        const val EXTRA_FRAGMENT_TITLE = "EXTRA_FRAGMENT_TITLE"
     }
 }
