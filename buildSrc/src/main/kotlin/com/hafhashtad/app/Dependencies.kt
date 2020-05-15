@@ -15,6 +15,7 @@ object Dependencies {
     val androidXConstraintLayout = "androidx.constraintlayout:constraintlayout:${Versions.androidXConstraintLayout}"
     val androidXRecyclerView = "androidx.recyclerview:recyclerview:${Versions.androidXRecyclerView}"
     val androidXCardView = "androidx.cardview:cardview:${Versions.androidXCardView}"
+    val androidXSwipeRefreshLayout = "androidx.swiperefreshlayout:swiperefreshlayout:${Versions.androidXSwipeRefreshLayout}"
     val googleAndroidMaterial = "com.google.android.material:material:${Versions.googleAndroidMaterial}"
 
     /* Jetpack Lifecycle Component */

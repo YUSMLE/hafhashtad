@@ -16,6 +16,7 @@ object Versions {
     const val androidXConstraintLayout = "2.0.0-beta4"
     const val androidXRecyclerView = "1.1.0"
     const val androidXCardView = "1.0.0"
+    const val androidXSwipeRefreshLayout = "1.0.0"
     const val googleAndroidMaterial = "1.2.0-alpha05"
 
     /* Jetpack Architecture Components */

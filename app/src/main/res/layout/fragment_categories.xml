@@ -21,10 +21,10 @@
             app:refreshing="@{viewState.loadingInitialPage}">
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/movies"
+                android:id="@+id/categories"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:contentDescription="Movies"
+                android:contentDescription="Categories"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 

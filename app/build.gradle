@@ -85,6 +85,7 @@ dependencies {
     implementation Dependencies.androidXConstraintLayout
     implementation Dependencies.androidXRecyclerView
     implementation Dependencies.androidXCardView
+    implementation Dependencies.androidXSwipeRefreshLayout
     implementation Dependencies.googleAndroidMaterial
 
     /* Jetpack Lifecycle Component */
