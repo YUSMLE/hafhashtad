@@ -7,6 +7,7 @@ import com.hafhashtad.core.data.StoreDataSource
 import com.hafhashtad.core.domain.Category
 import com.hafhashtad.core.domain.Product
 import com.hafhashtad.core.domain.Resource
+import kotlinx.coroutines.delay
 import java.io.IOException
 import javax.inject.Inject
 
@@ -65,6 +66,8 @@ class RemoteStoreDataSource @Inject constructor(
         newCategoryId: Int
     ): Resource<Product> {
         return try {
+            delay(2400L) // delay a bit to simulate HTTP request processing
+
             val response = service.updateCategoryOfProduct(productId, newCategoryId)
             return if (response.isSuccessful) {
                 Resource.success(productResponseMapper.transformToModel(response.body()!!)!!)

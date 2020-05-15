@@ -11,6 +11,9 @@ object Const {
     // The language specification for Hafhashtad API services.
     const val LANGUAGE = "en-US"
 
+    // Constant color of loading states
+    const val LOADING_COLOR_STRING = "#DEDEDE"
+
     /* Bundled Extra Queries */
     const val EXTRA_PRODUCT_ID = "EXTRA_PRODUCT_ID"
     const val EXTRA_CATEGORY_NAME = "EXTRA_CATEGORY_ID"
