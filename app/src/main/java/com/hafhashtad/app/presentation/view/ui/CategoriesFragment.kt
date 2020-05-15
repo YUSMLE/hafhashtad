@@ -3,15 +3,24 @@ package com.hafhashtad.app.presentation.view.ui
 import android.content.Context
 import android.os.Bundle
 import android.view.*
+import android.view.animation.AnimationUtils
+import android.widget.TextView
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.hafhashtad.app.R
 import com.hafhashtad.app.common.BaseFragment
+import com.hafhashtad.app.common.help.EndlessScrollListener
+import com.hafhashtad.app.common.help.observeNonNull
 import com.hafhashtad.app.common.help.runIfNull
 import com.hafhashtad.app.databinding.FragmentCategoriesBinding
+import com.hafhashtad.app.presentation.model.ListItem
 import com.hafhashtad.app.presentation.view.adapter.StoreListAdapter
+import com.hafhashtad.app.presentation.view.adapter.VerticalSpaceItemDecoration
+import com.hafhashtad.app.presentation.view.callback.ListItemCallback
 import com.hafhashtad.app.presentation.viewmodel.MainVM
 import com.hafhashtad.app.presentation.viewstate.CategoryListVS
 import javax.inject.Inject
@@ -118,23 +127,83 @@ class CategoriesFragment : BaseFragment() {
     }
 
     override fun setupStoreListView() {
-        // TODO implement
+        categoriesAdapter = StoreListAdapter(mCallback)
+
+        val linearLayoutManager = LinearLayoutManager(context)
+        dataBinding.categories.apply {
+            adapter = categoriesAdapter
+            layoutManager = linearLayoutManager
+            addItemDecoration(VerticalSpaceItemDecoration(1))
+            addOnScrollListener(object : EndlessScrollListener(linearLayoutManager) {
+                override fun onLoadMore(page: Int) {
+                    // Nothing
+                }
+            })
+        }
+
+        dataBinding.swipeContainer.setOnRefreshListener {
+            categoriesAdapter.clearItems()
+            fetchCategories()
+        }
     }
 
     override fun setupErrorAnnounce() {
-        // TODO implement
+        dataBinding.errorAnnounce.setFactory {
+            val t = TextView(context)
+            t.gravity = Gravity.CENTER_VERTICAL or Gravity.CENTER_HORIZONTAL
+            t.setTextColor(context!!.resources.getColor(R.color.colorTextDescription))
+            t
+        }
+        dataBinding.errorAnnounce.inAnimation = AnimationUtils.loadAnimation(
+            context,
+            R.anim.slide_in_down
+        )
+        dataBinding.errorAnnounce.outAnimation = AnimationUtils.loadAnimation(
+            context,
+            R.anim.slide_out_up
+        )
+        dataBinding.errorAnnounce.setCurrentText("")
     }
 
     private fun renderCategoryListViewState(categoryListVS: CategoryListVS) {
-        // TODO implement
+        with(dataBinding) {
+            viewState = categoryListVS
+            executePendingBindings()
+        }
+
+        // Handle showing loading indicator for sequence pages
+        categoryListVS.getLoadingListItem()?.let {
+            categoriesAdapter.showLoadingItem(it)
+        } ?: run {
+            categoriesAdapter.hideLoadingItem()
+        }
+
+        // Handle showing error for initial page
+        if (categoryListVS.shouldShowErrorAnnounce()) {
+            dataBinding.errorAnnounce.setText(categoryListVS.getErrorMessage())
+        }
+        else {
+            dataBinding.errorAnnounce.setText("")
+        }
+
+        // Handle showing error for sequence pages
+        categoryListVS.getErrorListItem()?.let {
+            categoriesAdapter.showErrorItem(it)
+        } ?: run {
+            categoriesAdapter.hideErrorItem()
+        }
+
+        // Handle showing products
+        if (categoryListVS.page == 1) categoriesAdapter.clearItems()
+        categoriesAdapter.addItems(categoryListVS.getCategoryListItems())
     }
 
     private fun fetchCategories() {
-        // TODO implements
+        mainVM.fetchCategories()
     }
 
     private fun backToProductsPage() {
-        findNavController().popBackStack()
+        findNavController().navigateUp()
     }
 
     /****************************************************
@@ -144,7 +213,28 @@ class CategoriesFragment : BaseFragment() {
     override fun setupObservers() {
         super.setupObservers()
 
-        // TODO implement
+        mainVM.getCategoriesStream().observeNonNull(viewLifecycleOwner) {
+            renderCategoryListViewState(it)
+        }
+    }
+
+    /**
+     * Categories Adapter Callback
+     */
+    private val mCallback: ListItemCallback by lazy {
+        object : ListItemCallback {
+            override fun onClick(item: ListItem.CategoryListItem) {
+                if (lifecycle.currentState.isAtLeast(Lifecycle.State.STARTED)) {
+                    backToProductsPage()
+                }
+            }
+
+            override fun onClick(item: ListItem.ErrorListItem) {
+                if (lifecycle.currentState.isAtLeast(Lifecycle.State.STARTED)) {
+                    fetchCategories()
+                }
+            }
+        }
     }
 
     companion object {

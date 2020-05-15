@@ -218,7 +218,7 @@ class ProductsFragment : BaseFragment() {
     }
 
     /**
-     * Movies Adapter Callback
+     * Products Adapter Callback
      */
     private val mCallback: ListItemCallback by lazy {
         object : ListItemCallback {
