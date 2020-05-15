@@ -48,12 +48,14 @@ class ListItemDistinguisher(
         return if (oldItem.viewType == ListItemType.PRODUCT_ITEM &&
                    newItem.viewType == ListItemType.PRODUCT_ITEM
         ) {
-            return newItem == oldItem
+            return (newItem as ListItem.ProductListItem).product ==
+                    (oldItem as ListItem.ProductListItem).product
         }
         else if (oldItem.viewType == ListItemType.CATEGORY_ITEM &&
                  newItem.viewType == ListItemType.CATEGORY_ITEM
         ) {
-            return newItem == oldItem
+            return (newItem as ListItem.CategoryListItem).category ==
+                    (oldItem as ListItem.CategoryListItem).category
         }
         else {
             false

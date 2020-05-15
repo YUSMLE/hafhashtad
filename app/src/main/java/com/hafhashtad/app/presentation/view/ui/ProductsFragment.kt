@@ -194,14 +194,15 @@ class ProductsFragment : BaseFragment() {
         }
 
         // Handle showing products
-        productsAdapter.addItems(productListVS.getProductListItems())
+        productsAdapter.setDataset(productListVS.getProductListItems() as ArrayList<ListItem>)
     }
 
     private fun fetchProducts() {
         mainVM.fetchProducts()
     }
 
-    private fun navigateToCategoriesPage() {
+    private fun navigateToCategoriesPage(item: ListItem.ProductListItem) {
+        mainVM.setSelectedProductListItem(item)
         findNavController().navigate(R.id.action_ProductsFragment_to_CategoriesFragment)
     }
 
@@ -224,7 +225,7 @@ class ProductsFragment : BaseFragment() {
         object : ListItemCallback {
             override fun onClick(item: ListItem.ProductListItem) {
                 if (lifecycle.currentState.isAtLeast(Lifecycle.State.STARTED)) {
-                    navigateToCategoriesPage()
+                    navigateToCategoriesPage(item)
                 }
             }
 

@@ -41,6 +41,8 @@ class CategoriesFragment : BaseFragment() {
     private lateinit var dataBinding: FragmentCategoriesBinding
     private lateinit var categoriesAdapter: StoreListAdapter
 
+    private lateinit var parentProductListItem: ListItem.ProductListItem
+
     /****************************************************
      * FRAGMENT LIFECYCLE
      ***************************************************/
@@ -202,7 +204,8 @@ class CategoriesFragment : BaseFragment() {
         mainVM.fetchCategories()
     }
 
-    private fun backToProductsPage() {
+    private fun backToProductsPage(item: ListItem.CategoryListItem) {
+        mainVM.updateCategoryOfProduct(parentProductListItem, item)
         findNavController().navigateUp()
     }
 
@@ -212,6 +215,10 @@ class CategoriesFragment : BaseFragment() {
 
     override fun setupObservers() {
         super.setupObservers()
+
+        mainVM.getSelectedProductListItem().observeNonNull(viewLifecycleOwner) {
+            parentProductListItem = it
+        }
 
         mainVM.getCategoriesStream().observeNonNull(viewLifecycleOwner) {
             renderCategoryListViewState(it)
@@ -225,7 +232,7 @@ class CategoriesFragment : BaseFragment() {
         object : ListItemCallback {
             override fun onClick(item: ListItem.CategoryListItem) {
                 if (lifecycle.currentState.isAtLeast(Lifecycle.State.STARTED)) {
-                    backToProductsPage()
+                    backToProductsPage(item)
                 }
             }
 
