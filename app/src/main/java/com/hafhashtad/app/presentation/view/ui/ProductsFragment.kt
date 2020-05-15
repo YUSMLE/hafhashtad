@@ -195,6 +195,7 @@ class ProductsFragment : BaseFragment() {
 
         // Handle showing products
         productsAdapter.setDataset(productListVS.getProductListItems() as ArrayList<ListItem>)
+        productsAdapter.notifyDataSetChanged()
     }
 
     private fun fetchProducts() {

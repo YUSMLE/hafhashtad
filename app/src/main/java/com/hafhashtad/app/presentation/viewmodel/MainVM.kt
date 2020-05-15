@@ -79,6 +79,10 @@ class MainVM @Inject constructor(
                 categoryListItem.category.id
             )
 
+            /**
+             * It's a simulated use case. So, update the dataset anyway.
+             */
+
             withContext(Dispatchers.Main) {
                 applyNewCategoryColorOfProduct(productListItem, categoryListItem.category.color)
             }
